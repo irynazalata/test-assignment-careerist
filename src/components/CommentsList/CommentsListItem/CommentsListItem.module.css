@@ -1,0 +1,37 @@
+.item {
+  display: flex;
+  width: 500px;
+  align-items: center;
+  font-weight: 500;
+  margin: 0 auto 10px;
+  background-color: #fff;
+  border: solid 1px #dadada;
+  padding: 20px 20px;
+}
+.infoContainer {
+  display: flex;
+  flex-direction: column;
+}
+.name {
+  width: 80px;
+  font-size: 16px;
+  font-weight: 500;
+  margin: 0;
+  margin-right: 40px;
+  color: #073107;
+}
+
+.comment {
+  font-size: 14px;
+  font-weight: 500;
+  margin: 0;
+  margin-bottom: 5px;
+  color: #3f4246;
+}
+
+.time {
+  font-size: 12px;
+  padding: 0;
+  color: #3f4246;
+  margin: 0;
+}
