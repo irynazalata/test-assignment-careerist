@@ -17,10 +17,27 @@ class App extends Component {
       .catch((error) => console.log(error));
   }
 
+  // componentDidUpdate() {
+
+  // }
   handleNewComment = (comment) => {
     let { comments } = this.state;
     comments = [...comments, comment];
     this.setState({ comments });
+  };
+
+  deleteComment = (id) => {
+    this.setState((prevstate) => {
+      return {
+        comments: prevstate.comments.filter((comment) => comment._id !== id),
+      };
+    });
+    axios
+      .delete(`https://stormy-mountain-89000.herokuapp.com/${id}`)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => console.log(error));
   };
   render() {
     const comments = this.state.comments;
@@ -28,7 +45,10 @@ class App extends Component {
       <>
         <Title title="Welcome to our Guest Book"></Title>
         <GuestBook addComment={this.handleNewComment}></GuestBook>
-        <CommentsList comments={comments}></CommentsList>
+        <CommentsList
+          comments={comments}
+          deleteComment={this.deleteComment}
+        ></CommentsList>
       </>
     );
   }

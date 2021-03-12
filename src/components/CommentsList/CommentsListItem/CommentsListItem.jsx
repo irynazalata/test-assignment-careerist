@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./CommentsListItem.module.css";
 import PropTypes from "prop-types";
 
-const CommentsListItem = ({ comment, name, time }) => {
+const CommentsListItem = ({ id, comment, name, time, deleteComment }) => {
   return (
     <li className={styles.item}>
       <div className={styles.infoContainer}>
@@ -11,6 +11,13 @@ const CommentsListItem = ({ comment, name, time }) => {
       </div>
 
       <p className={styles.comment}>{comment}</p>
+      <button
+        type="button"
+        className={styles.btn}
+        onClick={() => deleteComment(id)}
+      >
+        Delete
+      </button>
     </li>
   );
 };
@@ -19,6 +26,7 @@ CommentsListItem.propTypes = {
   comment: PropTypes.string,
   name: PropTypes.string,
   time: PropTypes.string,
+  deleteComment: PropTypes.func,
 };
 
 export default CommentsListItem;
