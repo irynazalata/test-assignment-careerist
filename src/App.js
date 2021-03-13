@@ -17,9 +17,6 @@ class App extends Component {
       .catch((error) => console.log(error));
   }
 
-  // componentDidUpdate() {
-
-  // }
   handleNewComment = (comment) => {
     let { comments } = this.state;
     comments = [...comments, comment];
@@ -32,8 +29,20 @@ class App extends Component {
         comments: prevstate.comments.filter((comment) => comment._id !== id),
       };
     });
+    const savedTokens = JSON.parse(localStorage.getItem("tokens"));
+    function getToken(array, commentId) {
+      return array.find((item) => item["id"] === commentId);
+    }
+    const storedData = getToken(savedTokens, id);
+    const token = storedData.token;
+    const renewedStorage = savedTokens.filter((item) => item.token !== token);
+    localStorage.setItem("tokens", JSON.stringify(renewedStorage));
     axios
-      .delete(`https://stormy-mountain-89000.herokuapp.com/${id}`)
+      .delete(`https://stormy-mountain-89000.herokuapp.com/${id}`, {
+        headers: {
+          Authorization: token,
+        },
+      })
       .then((response) => {
         console.log(response);
       })

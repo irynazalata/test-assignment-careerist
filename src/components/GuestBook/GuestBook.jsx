@@ -7,6 +7,7 @@ class GuestBook extends Component {
     name: "",
     comment: "",
     time: Date.now(),
+    tokens: [],
   };
 
   handleChange = (event) => {
@@ -30,13 +31,21 @@ class GuestBook extends Component {
           "Content-Type": "application/json",
         },
       })
-      .then((response) => console.log(response))
+      .then((response) => {
+        let { tokens } = this.state;
+        tokens = [
+          ...tokens,
+          { token: response.data.token, id: response.data._id },
+        ];
+        this.setState({
+          name: "",
+          comment: "",
+          tokens: tokens,
+        });
+        localStorage.setItem("tokens", JSON.stringify(this.state.tokens));
+        this.props.addComment(response.data);
+      })
       .catch((error) => console.log(error));
-    this.props.addComment(comment);
-    this.setState({
-      name: "",
-      comment: "",
-    });
   };
   render() {
     const { name, comment } = this.state;
