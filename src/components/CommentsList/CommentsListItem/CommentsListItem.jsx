@@ -10,10 +10,11 @@ const CommentsListItem = ({
   token,
   deleteComment,
 }) => {
-  const tokenExists = () => {
+  function tokenExists() {
     const savedTokens = JSON.parse(localStorage.getItem("tokens"));
     return savedTokens.find((item) => item["token"] === token);
-  };
+  }
+  const commentToken = tokenExists();
   return (
     <li className={styles.item}>
       <div className={styles.infoContainer}>
@@ -21,7 +22,7 @@ const CommentsListItem = ({
         <p className={styles.name}>{name}:</p>
       </div>
       <p className={styles.comment}>{comment}</p>
-      {tokenExists ? (
+      {commentToken ? (
         <button
           type="button"
           className={styles.btn}
