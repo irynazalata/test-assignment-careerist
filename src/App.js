@@ -30,10 +30,7 @@ class App extends Component {
       };
     });
     const savedTokens = JSON.parse(localStorage.getItem("tokens"));
-    function getToken(array, commentId) {
-      return array.find((item) => item["id"] === commentId);
-    }
-    const storedData = getToken(savedTokens, id);
+    const storedData = savedTokens.find((item) => item["id"] === id);
     const token = storedData.token;
     const renewedStorage = savedTokens.filter((item) => item.token !== token);
     localStorage.setItem("tokens", JSON.stringify(renewedStorage));

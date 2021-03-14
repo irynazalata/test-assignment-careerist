@@ -2,22 +2,36 @@ import React from "react";
 import styles from "./CommentsListItem.module.css";
 import PropTypes from "prop-types";
 
-const CommentsListItem = ({ id, comment, name, time, deleteComment }) => {
+const CommentsListItem = ({
+  id,
+  comment,
+  name,
+  time,
+  token,
+  deleteComment,
+}) => {
+  const tokenExists = () => {
+    const savedTokens = JSON.parse(localStorage.getItem("tokens"));
+    return savedTokens.find((item) => item["token"] === token);
+  };
   return (
     <li className={styles.item}>
       <div className={styles.infoContainer}>
         <p className={styles.time}>{time}</p>
         <p className={styles.name}>{name}:</p>
       </div>
-
       <p className={styles.comment}>{comment}</p>
-      <button
-        type="button"
-        className={styles.btn}
-        onClick={() => deleteComment(id)}
-      >
-        Delete
-      </button>
+      {tokenExists ? (
+        <button
+          type="button"
+          className={styles.btn}
+          onClick={() => deleteComment(id)}
+        >
+          Delete
+        </button>
+      ) : (
+        ""
+      )}
     </li>
   );
 };

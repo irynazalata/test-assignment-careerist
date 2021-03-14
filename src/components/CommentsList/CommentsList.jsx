@@ -11,7 +11,7 @@ const CommentsList = ({ comments, deleteComment }) => {
   };
   return (
     <TransitionGroup component="ul" className={styles.list}>
-      {comments.map(({ _id, name, comment, time }) => {
+      {comments.map(({ _id, name, comment, time, token }) => {
         const postTime = new Date(time).toLocaleString("Uk-Uk", options);
         return (
           <CSSTransition key={_id} timeout={250} classNames={styles}>
@@ -20,6 +20,7 @@ const CommentsList = ({ comments, deleteComment }) => {
               name={name}
               comment={comment}
               time={postTime}
+              token={token}
               deleteComment={deleteComment}
             ></CommentsListItem>
           </CSSTransition>
