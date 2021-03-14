@@ -26,7 +26,7 @@ class GuestBook extends Component {
     };
     const commentJSON = JSON.stringify(comment);
     axios
-      .post("https://stormy-mountain-89000.herokuapp.com/", commentJSON, {
+      .post("https://guestbook-database.herokuapp.com/", commentJSON, {
         headers: {
           "Content-Type": "application/json",
         },

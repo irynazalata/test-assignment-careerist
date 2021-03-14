@@ -10,7 +10,7 @@ class App extends Component {
   };
   componentDidMount() {
     axios
-      .get("https://stormy-mountain-89000.herokuapp.com/")
+      .get("https://guestbook-database.herokuapp.com/")
       .then((response) => {
         this.setState({ comments: response.data });
       })
@@ -35,7 +35,7 @@ class App extends Component {
     const renewedStorage = savedTokens.filter((item) => item.token !== token);
     localStorage.setItem("tokens", JSON.stringify(renewedStorage));
     axios
-      .delete(`https://stormy-mountain-89000.herokuapp.com/${id}`, {
+      .delete(`https://guestbook-database.herokuapp.com/${id}`, {
         headers: {
           Authorization: token,
         },
