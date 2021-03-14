@@ -12,7 +12,7 @@ const CommentsListItem = ({
 }) => {
   function tokenExists() {
     const savedTokens = JSON.parse(localStorage.getItem("tokens"));
-    return savedTokens.find((item) => item["token"] === token);
+    if (savedTokens) return savedTokens.find((item) => item["token"] === token);
   }
   const commentToken = tokenExists();
   return (
